@@ -48,11 +48,21 @@ WORKDIR /opt/pipeline
 
 
 ### igraph/python
-RUN python -m pip install --upgrade pip
 COPY requirements.txt /root/requirements.txt
-RUN python -m pip install -r /root/requirements.txt
+RUN python -m pip install --upgrade pip && \
+    python -m pip install -r /root/requirements.txt
 
 ### velvet
+#### TODO: figure out next steps to install binaries; there is no 'install' action in the 
+#### makefile. Also, see if this is one of those things that needs the binaries to stay 
+#### in the build dir for REASONS.
+RUN mkdir -p /tmp/build/velvet && \
+    cd /tmp/build/velvet && \
+    wget https://github.com/dzerbino/velvet/archive/refs/tags/v1.2.10.tar.gz && \
+    ls && \
+    tar xfz ./v1.2.10.tar.gz && \ 
+    cd velvet-1.2.10 && \
+    make && \
 ### oases
 ### BLAST
 ### Evigene
