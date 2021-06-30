@@ -2,6 +2,12 @@ FROM python:2.7.18-buster
 # Debian Buster base OS
 # Python 2.7.18
 
+###### METADATA ######
+
+LABEL authors = "Peter Vaillancourt (pzv2@cornell.edu), Eric Coulter (jecoulte@iu.edu)"
+
+######################
+
 ## Use bash
 SHELL ["/bin/bash","-c"]
 
