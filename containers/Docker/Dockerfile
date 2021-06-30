@@ -16,6 +16,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && apt-get install -y \
     wget \
     unzip \
+    git \
     time
 
 RUN mkdir /opt/pipeline
@@ -41,12 +42,17 @@ WORKDIR /opt/pipeline
 
 
 ### igraph/python
+RUN python -m pip install --upgrade pip
+COPY requirements.txt /root/requirements.txt
+RUN python -m pip install -r /root/requirements.txt
+
 ### velvet
 ### oases
 ### BLAST
 ### Evigene
 ### Busco
 ### Hmmer
+RUN apt-get install -y hmmer
 ### Augustus
 ### bamtools
 ### QUAST
