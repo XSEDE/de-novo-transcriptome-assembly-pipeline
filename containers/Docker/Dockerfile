@@ -82,6 +82,17 @@ RUN mkdir -p /tmp/build/oases && \
     make 
     
 ### BLAST
+#### Hash checked against https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.11.0/ncbi-blast-2.11.0+-src.tar.gz.md5
+#### The prefix question remains, but is an option with this one, unlike the others!
+RUN mkdir -p /tmp/build/BLAST && \
+    cd /tmp/build/BLAST && \
+    wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.11.0/ncbi-blast-2.11.0+-src.tar.gz && \
+    if [[ $(md5sum ./ncbi-blast-2.11.0+-src.tar.gz | cut -f 1 -d' ') == "13f93eea6741af2bbcc07f59941dc77b" ]]; then  echo "VERSION MATCHES"; else  exit 1; fi && \
+    tar xvf ./ncbi-blast-2.11.0+-src.tar.gz && \
+    cd ncbi-blast-2.11.0+-src/c++/ && \
+    ./configure && \
+    make
+
 ### Evigene
 ### Busco
 ### Hmmer
