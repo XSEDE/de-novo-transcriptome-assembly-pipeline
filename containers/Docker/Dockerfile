@@ -102,8 +102,10 @@ RUN mkdir -p /tmp/build/evigene && \
 
 ### Busco
 ### Hmmer
-RUN apt-get install -y hmmer
-### Augustus
+RUN echo -E "Package: hmmer \n Version: 3.2.1+dfsg-1 \n Pin-Priority: 999" > /etc/apt/preferences.d/hmmer && \
+    echo -E "Package: hmmer-doc \n Version: 3.2.1+dfsg-1 \n Pin-Priority: 999" > /etc/apt/preferences.d/hmmer-doc && \
+    apt-get install -y hmmer hmmer-doc
+
 ### bamtools
 ### Transdecoder
 ### Trinotate
