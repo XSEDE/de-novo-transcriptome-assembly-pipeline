@@ -47,10 +47,14 @@ WORKDIR /opt/pipeline
 ### R
 
 
+#### All of the following are provided by pip:
 ### igraph/python
+### QUAST
 COPY requirements.txt /root/requirements.txt
 RUN python -m pip install --upgrade pip && \
     python -m pip install -r /root/requirements.txt
+
+#### Individual build sections:
 
 ### velvet
 #### TODO: figure out next steps to install binaries; there is no 'install' action in the 
@@ -59,11 +63,24 @@ RUN python -m pip install --upgrade pip && \
 RUN mkdir -p /tmp/build/velvet && \
     cd /tmp/build/velvet && \
     wget https://github.com/dzerbino/velvet/archive/refs/tags/v1.2.10.tar.gz && \
-    ls && \
     tar xfz ./v1.2.10.tar.gz && \ 
     cd velvet-1.2.10 && \
-    make && \
+    make 
+
 ### oases
+#### Wow, this is sorta gross. oases links velvet as a submodule in git, but the release doesn't include it.
+#### It might be more "correct" to git {clone,checkout <sha1>,reset --hard,checkout -b main,make} ?
+####  but THEN we'll have velvet built in 2 places!
+#### This also only runs make obj on the velvet dir, so it's not sufficient to build all of velvet.
+RUN mkdir -p /tmp/build/oases && \
+    cd /tmp/build/velvet &&\
+    wget https://github.com/dzerbino/oases/archive/refs/tags/0.2.09.tar.gz && \
+    tar xfz ./0.2.09.tar.gz && \ 
+    cd oases-0.2.09 && \
+    rmdir velvet && \
+    ln -s /tmp/build/velvet/velvet-1.2.10 ./velvet && \
+    make 
+    
 ### BLAST
 ### Evigene
 ### Busco
@@ -71,7 +88,6 @@ RUN mkdir -p /tmp/build/velvet && \
 RUN apt-get install -y hmmer
 ### Augustus
 ### bamtools
-### QUAST
 ### Transdecoder
 ### Trinotate
 
