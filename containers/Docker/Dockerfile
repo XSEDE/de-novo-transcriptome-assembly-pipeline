@@ -113,6 +113,11 @@ RUN echo -E "Package: bamtools \n Version: 2.5.1+dfsg-3 \n Pin-Priority: 999" > 
 
 
 ### Augustus
+RUN mkdir -p /tmp/build/augustus && \
+    wget https://github.com/Gaius-Augustus/Augustus/releases/download/v3.4.0/augustus-3.4.0.tar.gz && \
+    tar xfz augustus-3.4.0.tar.gz && \
+    cd augustus-3.4.0
+
 ### Transdecoder
 ### Trinotate
 
