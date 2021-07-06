@@ -100,7 +100,6 @@ RUN mkdir -p /tmp/build/evigene && \
     wget https://downloads.sourceforge.net/project/evidentialgene/evigene20may20.tar && \
     tar xfv evigene20may20.tar
 
-### Busco
 ### Hmmer
 RUN echo -E "Package: hmmer \n Version: 3.2.1+dfsg-1 \n Pin-Priority: 999" > /etc/apt/preferences.d/hmmer && \
     echo -E "Package: hmmer-doc \n Version: 3.2.1+dfsg-1 \n Pin-Priority: 999" > /etc/apt/preferences.d/hmmer-doc && \
@@ -118,6 +117,7 @@ RUN mkdir -p /tmp/build/augustus && \
     tar xfz augustus-3.4.0.tar.gz && \
     cd augustus-3.4.0
 
+### Busco
 ### Transdecoder
 ### Trinotate
 
