@@ -107,6 +107,12 @@ RUN echo -E "Package: hmmer \n Version: 3.2.1+dfsg-1 \n Pin-Priority: 999" > /et
     apt-get install -y hmmer hmmer-doc
 
 ### bamtools
+RUN echo -E "Package: bamtools \n Version: 2.5.1+dfsg-3 \n Pin-Priority: 999" > /etc/apt/preferences.d/bamtools && \
+    echo -E "Package: libbamtools-dev \n Version: 2.5.1+dfsg-3 \n Pin-Priority: 999" > /etc/apt/preferences.d/libbamtools-dev && \
+    apt-get install -y libbamtools-dev bamtools
+
+
+### Augustus
 ### Transdecoder
 ### Trinotate
 
