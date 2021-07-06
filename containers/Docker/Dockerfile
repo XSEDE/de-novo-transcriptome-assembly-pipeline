@@ -94,6 +94,12 @@ RUN mkdir -p /tmp/build/BLAST && \
     make
 
 ### Evigene
+#### This is just a pile of scripts; at some point change /tmp/build to a real install dir
+RUN mkdir -p /tmp/build/evigene && \
+    cd /tmp/build/evigene && \
+    wget https://downloads.sourceforge.net/project/evidentialgene/evigene20may20.tar && \
+    tar xfv evigene20may20.tar
+
 ### Busco
 ### Hmmer
 RUN apt-get install -y hmmer
